@@ -8,25 +8,25 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
+// https://gist.github.com/sebleier/554280
 
-//java -cp classes io.CapitalizeMain src/io/doginthehat.txt src/io/ratinthehat.txt
-//reading input file, capitalizing it and output to rat in the hat
-
-public class CapitalizeMain {
+public class OrderedUniqueWords {
 
    public static void main(String[] args) throws FileNotFoundException, IOException {
 
       String inputFile = args[0];
-      String outputFile = args[1];
 
       // Open inputFile for reading
       Reader reader = new FileReader(inputFile);
       BufferedReader bufferedReader = new BufferedReader(reader);
 
-      // Open outputFile for writing
-      Writer writer = new FileWriter(outputFile);
-      BufferedWriter bufferedWriter = new BufferedWriter(writer);
+      // Create a set of string
+      // <> - generics
+      TreeSet<String> uniqueWords = new TreeSet<>();
 
       String line = "x";
       while (null != line) {
@@ -38,19 +38,22 @@ public class CapitalizeMain {
             break;
 
          //System.out.printf(">>>> line: %s\n", line.toUpperCase());
-         String transformed = line.toUpperCase();
+         String transformed = line.replaceAll("\\p{Punct}", "").toLowerCase().trim();
+         //System.out.printf(">> %s\n", transformed);
 
-         // Write to file
-         bufferedWriter.write(transformed + "\n");
+         for (String word: transformed.split(" "))
+            uniqueWords.add(word);
       }
-
-      // Flush remaining data to file
-      bufferedWriter.close();
-      //writer.flush();
-      writer.close();
 
       // Close the files
       reader.close();
+
+      System.out.printf("Unique words in %s: %d\n", inputFile, uniqueWords.size());
+
+      for (String word: uniqueWords)
+         System.out.printf("%s, ", word);
+
+      System.out.println();
    }
 
 }

@@ -25,7 +25,7 @@ public class ReadFileConsole {
                 //Path p = Path.get(a);
                 //File file = p.toFile();
 
-            //File is the location at that place
+            //File (catinthehat.txt) is the location at that place
             File file = new File(a);
             System.out.printf("path: %s\n", file.getAbsolutePath());
             System.out.printf("is file: %s\n", file.isFile());

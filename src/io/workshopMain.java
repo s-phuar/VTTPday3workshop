@@ -17,6 +17,10 @@ import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 
+//please note that bufferedReader and bufferedWriter can function independently
+//Only use this file for normal bufferedReading and bufferedWriting. The loop is useful for assignements
+//Interaction between the 2 blocks of code is buggy, so look at set of other Main files
+
 public class workshopMain {
     
     public static void main(String[] args)
@@ -31,21 +35,24 @@ public class workshopMain {
         String Input = args[0];
         String Output = args[1];
 
+        //******java -cp classes io.workshopMain src/io/doginthehat.txt src/io/ratinthehat.txt*********
+
+        //Input includes the absolute path + file name. If we only have filename we are using a relative path
         BufferedReader br = new BufferedReader(new FileReader(Input));
         System.out.println(br.readLine()); // reads only 1 line
         
-        //writer replaces file of same name, created under day3workshop
+        //Output includes the absolutepath + file name. if we only have filename we are using a relative path
         FileWriter bw = new FileWriter(Output);
         BufferedWriter wFile = new BufferedWriter(bw);
-        wFile.write("good doggie\n");
+        wFile.write("testing\n");
         
-        //test readering the written file
+        //test reading the written file
             // BufferedReader wr = new BufferedReader(new FileReader(Output));
             // System.out.println(wr.readLine());
             // wr.close();
         
         //****************************************************************************/
-        //java -cp classes io.workshopMain src/io/doginthehat.txt src/io/ratinthehat.txt
+        //
 
         //create set of strings
         Set <String> uniqueWords = new HashSet<>();
@@ -57,10 +64,10 @@ public class workshopMain {
         //force a non-null state
         String line = "x";
         while(null != line){
-            //Read a line
+            //Read a single line from br, this while be looped for each line of word, transformed and added to 'uniqueWords'/
             line = br.readLine();
 
-            //if line is nullm we have reach the EOF
+            //if line is null we have reach the End of the file
             if(null == line)
                 break;
 
@@ -93,7 +100,7 @@ public class workshopMain {
 
             }
 
-            //write to file
+            //write the transformed uniqueWords to file, includes the write at line 45
             wFile.write(transformed + "\n");
         }
 
