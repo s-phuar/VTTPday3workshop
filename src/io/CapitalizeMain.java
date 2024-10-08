@@ -51,6 +51,7 @@ public class CapitalizeMain {
 
       // Close the files
       reader.close();
+      
    }
 
 }
